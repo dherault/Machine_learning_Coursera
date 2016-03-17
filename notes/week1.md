@@ -39,17 +39,24 @@ For regression problems.
 
 Some better functions can be found [here](http://math.stackexchange.com/questions/70728/partial-derivative-in-gradient-descent-for-two-variables/189792#189792)
 
-**Hypothesis function**: h(x) = t0 + t1 * x (aka predictor function)
+**Hypothesis function**: `h(x) = t0 + t1 * x` (aka predictor function)
 
-**Cost function**: J(t0, t1) = (1 / 2m) * sum(i=1..m, (h(x\_i) - y\_i)²)
+**Cost function**: `J(t0, t1) = (1 / 2m) * sum(i=1..m, (h(x\_i) - y\_i)²)`
 
 The cost function measure the accuracy of the predictor function.
 
-**Gradient descent**: repeat until convergence: t\_j := t\_j - a * (d J(t0, t1) / d t\_j)
+**Gradient descent**: repeat until convergence: `t\_j := t\_j - a * (d J(t0, t1) / d t\_j)`
 
 **Gradient descent for linear regression**: repeat until convergence:
-- t0 := t0 - (a / m) * sum(i=1..m, (h(x\_i) - y\_i)) // notice no square, no half !== cost function
-- t1 := t1 - (a / m) * sum(i=1..m, (h(x\_i) - y\_i) * x\_i)
+- `t0 := t0 - (a / m) * sum(i=1..m, (h(x\_i) - y\_i))` notice no square, no half !== cost function
+- `t1 := t1 - (a / m) * sum(i=1..m, (h(x\_i) - y\_i) * x\_i)`
+
+!silmultaneous update!
+
+-temp0 := fun0
+-temp1 := fun1
+-t0 := temp0
+-t1 := temp1
 
 ### Linear algebra review
 
@@ -57,4 +64,17 @@ Just syk: A\_ij: ith row and jth column
 
 ### Model representation
 
+How to represent our hypothesis function h ?
 
+easy answer: `t0 + t1 * x` (lin reg with 1 var === univariate linear regression)
+
+### Cost function
+
+J is called a squared error function
+
+### Gradient descent
+
+Used to minimize cost functions.
+
+repeat until convergence: `t\_j := t\_j - a * (d J(t0, t1) / d t\_j)`
+`a` is call the "learning rate". If `a` is too small then the descent can be too slow. If it's too large, then the descent can overshoot the minimum, may fail to converge, or even diverge.

@@ -15,12 +15,12 @@ class Matrix {
     
     // Will check column uniformity and if values are numeric
     this.data.forEach((row, i) => {
-      
-      if (row.length !== nCol) throw new Error(`new Matrix: inconsistent column number at row ${i}`);
+      if (!Array.isArray(row)) throw new Error(`new Matrix: row ${i + 1} is not an array`);
+      if (row.length !== nCol) throw new Error(`new Matrix: inconsistent column number at row ${i + 1}`);
       
       row.forEach((item, j) => {
         
-        if (!isNumeric(item)) throw new Error(`new Matrix: found non-numeric value at (${i}, ${j}): ${item}`);
+        if (!isNumeric(item)) throw new Error(`new Matrix: found non-numeric value at (${i + 1}, ${j + 1}): ${item}`);
       });
     });
     
@@ -43,7 +43,7 @@ class Matrix {
   }
   
   add(matrix) {
-    if (!matrix instanceof Matrix) throw new Error('Matrix.add: expected arg to be a matrix');
+    if (!(matrix instanceof Matrix)) throw new Error('Matrix.add: expected arg to be a matrix');
     if (matrix.nRow !== this.nRow || matrix.nCol !== this.nCol) throw new Error('Matrix.add: given matrix does not match current matrix\'s dimensions');
     
     const newData = [];
@@ -60,7 +60,7 @@ class Matrix {
   multiply(x) {
     const gotScalar = isNumeric(x);
     
-    if (!x instanceof Matrix && !gotScalar) throw new Error('Matrix.multiply: expected arg to be a matrix or a number');
+    if (!(x instanceof Matrix) && !gotScalar) throw new Error('Matrix.multiply: expected arg to be a matrix or a number');
     
     return gotScalar ? this.multiplyScalar(x) : this.multiplyMatrix(x);
   }
@@ -81,7 +81,7 @@ class Matrix {
   }
   
   multiplyMatrix(matrix) {
-    if (!matrix instanceof Matrix) throw new Error('Matrix.multiplyMatrix: expected arg to be a matrix');
+    if (!(matrix instanceof Matrix)) throw new Error('Matrix.multiplyMatrix: expected arg to be a matrix');
     if (this.nRow !== matrix.nCol || this.nCol !== matrix.nRow) throw new Error('Matrix.multiplyMatrix: given matrix does not match current matrix\'s dimensions');
     
     const newData = [];

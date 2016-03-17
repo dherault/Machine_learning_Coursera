@@ -6,7 +6,7 @@ Class wiki: [link](https://share.coursera.org/wiki/index.php/ML:Main).
 
 Class content:
 
-- [ ] Week 1: Introduction, Linear algebra
+- [x] Week 1: Introduction, Cost function, Gradient descent, Linear algebra
 - [ ] Week 2:
 - [ ] Week 3:
 - [ ] Week 4:

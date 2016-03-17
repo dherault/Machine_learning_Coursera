@@ -30,19 +30,70 @@ describe('Matrix', () => {
   describe('constructor', () => {
     
     it('should throw on incorrect argument', () => {
-      let error1, error2;
-      try {
-        new Matrix('yolo');
-      }
-      catch(err) {
-        error1 = err;
-      }
+      let error1, error2, error3, error4;
+      
       try {
         new Matrix(1, 2, 3);
+      } catch(err) {
+        console.log(err);
+        error1 = err;
       }
-      catch(err) {
+      
+      try {
+        new Matrix('yolo');
+      } catch(err) {
+        console.log(err);
         error2 = err;
       }
+      
+      try {
+        new Matrix([]);
+      } catch(err) {
+        console.log(err);
+        error3 = err;
+      }
+      
+      try {
+        new Matrix([[1, 2, 3], 'yolo']);
+      } catch(err) {
+        console.log(err);
+        error4 = err;
+      }
+      
+      expect(error1).to.be.a('error');
+      expect(error2).to.be.a('error');
+      expect(error3).to.be.a('error');
+      expect(error4).to.be.a('error');
+    });
+    
+    it('should throw on column number inconsistency', () => {
+      let error;
+      try {
+        new Matrix([[1], [1, 2]]);
+      } catch(err) {
+        console.log(err);
+        error = err;
+      }
+      
+      expect(error).to.be.a('error');
+    });
+    
+    it('should throw on non-numeric values', () => {
+      let error1, error2;
+      try {
+        new Matrix([[1, 2], [1, undefined]]);
+      } catch(err) {
+        console.log(err);
+        error1 = err;
+      }
+      
+      try {
+        new Matrix([[1, 2], [1, '2']]);
+      } catch(err) {
+        console.log(err);
+        error2 = err;
+      }
+      
       expect(error1).to.be.a('error');
       expect(error2).to.be.a('error');
     });
@@ -51,35 +102,6 @@ describe('Matrix', () => {
       const array = [1, 2, 3];
       const matrixVector = new Matrix(array);
       assert.deepEqual(matrixVector.data, [array]);
-    });
-    
-    it('should throw on column number inconsistency', () => {
-      let error;
-      try {
-        new Matrix([[1], [1, 2]]);
-      }
-      catch(err) {
-        error = err;
-      }
-      expect(error).to.be.a('error');
-    });
-    
-    it('should throw on non-numeric values', () => {
-      let error1, error2;
-      try {
-        new Matrix([[1, 2], [1, undefined]]);
-      }
-      catch(err) {
-        error1 = err;
-      }
-      try {
-        new Matrix([[1, 2], [1, '2']]);
-      }
-      catch(err) {
-        error2 = err;
-      }
-      expect(error1).to.be.a('error');
-      expect(error2).to.be.a('error');
     });
     
     it('should have the correct dimension', () => {
@@ -104,29 +126,24 @@ describe('Matrix', () => {
     
     it('should throw on incorrect add argument', () => {
       
-      let error1, error2, error3;
+      let error1, error2;
       try {
-        m1.add('yolo');
-      }
-      catch(err) {
+        m1.add(111);
+      } catch(err) {
+        console.log(err);
         error1 = err;
       }
-      try {
-        m1.add(1);
-      }
-      catch(err) {
-        error2 = err;
-      }
+      
       try {
         m1.add(m2);
+      } catch(err) {
+        console.log(err);
+        error2 = err;
       }
-      catch(err) {
-        error3 = err;
-      }
+      
       
       expect(error1).to.be.a('error');
       expect(error2).to.be.a('error');
-      expect(error3).to.be.a('error');
     });
     
     it('should add correctly', () => {
@@ -145,29 +162,39 @@ describe('Matrix', () => {
     
     it('should throw on incorrect multiply argument', () => {
       
-      let error1, error2, error3;
+      let error1, error2, error3, error4;
       try {
         m1.multiply('yolo');
-      }
-      catch(err) {
+      } catch(err) {
+        console.log(err);
         error1 = err;
       }
+      
       try {
         m1.multiplyScalar(m1);
-      }
-      catch(err) {
+      } catch(err) {
+        console.log(err);
         error2 = err;
       }
+      
       try {
         m1.multiplyMatrix(111);
-      }
-      catch(err) {
+      } catch(err) {
+        console.log(err);
         error3 = err;
+      }
+      
+      try {
+        m1.multiplyMatrix(m2);
+      } catch(err) {
+        console.log(err);
+        error4 = err;
       }
       
       expect(error1).to.be.a('error');
       expect(error2).to.be.a('error');
       expect(error3).to.be.a('error');
+      expect(error4).to.be.a('error');
     });
     
     it('should multiply with a scalar correctly', () => {
@@ -206,5 +233,4 @@ describe('Matrix', () => {
       assert.deepEqual(m3.multiply(m4).data, m3_m4Data);
     });
   });
-  
 });
