@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha",
-    "coverage": "istanbul cover _mocha"
+    "test": "mocha --no-timeouts",
+    "coverage": "istanbul cover _mocha -- --no-timeouts"
   },
   "author": "David Hérault",
   "license": "CC0-1.0",
