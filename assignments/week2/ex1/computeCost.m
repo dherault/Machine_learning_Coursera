@@ -13,9 +13,14 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
+data = load('ex1data1.txt');
+X = data(:, 1); y = data(:, 2);
 
+a = [1, 2, 3];
+fprintf('yolo\n');
+fprintf(X);
 
-
+% J = (0.5 / m) * sum
 
 % =========================================================================
 
