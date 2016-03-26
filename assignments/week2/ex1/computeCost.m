@@ -13,14 +13,12 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-data = load('ex1data1.txt');
-X = data(:, 1); y = data(:, 2);
+%% this is the teacher's code
+m = size(X, 1); % number of training examples
+predictions = X*theta; % predictions of hypothesis on all m examples
+sqrErrors = (predictions - y) .^ 2; % squarred errors
 
-a = [1, 2, 3];
-fprintf('yolo\n');
-fprintf(X);
-
-% J = (0.5 / m) * sum
+J = 1 / (2*m) * sum(sqrErrors);
 
 % =========================================================================
 
