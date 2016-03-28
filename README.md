@@ -8,7 +8,7 @@ Class content:
 
 - [x] Week 1: Introduction, Cost function, Gradient descent, Linear algebra
 - [x] Week 2: Linear Regression with Multiple Variables
-- [ ] Week 3: Classification
+- [ ] Week 3: Classification (logistic regression), Regularization
 - [ ] Week 4:
 - [ ] Week 5:
 - [ ] Week 6:
