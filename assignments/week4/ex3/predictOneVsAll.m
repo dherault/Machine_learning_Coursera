@@ -30,10 +30,17 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+% disp('X'), disp(size(X)), disp(X),
+% disp('all_theta'), disp(size(all_theta)), disp(all_theta),
 
+% disp('X * all_thetaT')
+% disp(X * all_theta')
 
+% disp('max prev')
+[x, p] = max(X * all_theta', [], 2);
+% disp(ix)
 
-
+% p = ix;
 
 
 % =========================================================================

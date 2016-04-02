@@ -37,12 +37,33 @@ grad = zeros(size(theta));
 %
 
 
+% disp('Size of y'), disp(size(y)),
+% disp('Size of theta'), disp(size(theta)),
+% disp('Size of X'), disp(size(X)),
+% disp('Size of lambda'), disp(size(lambda)),
 
+h = sigmoid(X * theta);
 
+% disp('h = sigmoid(X * theta)'), disp(h), disp(size(h)),
 
+% disp('-y .* log(h) - (1 - y) .* log(1 - h)'), disp(-y .* log(h) - (1 - y) .* log(1 - h)),
 
+J = (1 / m) * sum(-y .* log(h) - (1 - y) .* log(1 - h));
 
+% disp('J = (1 / m) * sum(-y .* log(h) - (1 - y) .* log(1 - h))'), disp(J),
 
+grad = (1 / m) * X' * (h - y);
+
+% disp('grad = (1 / m) * Xt * (h - y)'), disp(grad), disp(size(grad)),
+
+newTheta = [zeros(1, size(theta, 2)); theta(2:end)]; % do not penalize theta_0
+
+% disp('theta'), disp(size(theta)), disp(theta),
+% disp('newTheta'), disp(size(newTheta)), disp(newTheta),
+
+J = J + lambda / (2 * m) * sum(newTheta.^2);
+
+grad = grad + lambda / m * newTheta;
 
 
 % =============================================================
