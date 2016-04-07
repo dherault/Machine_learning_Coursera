@@ -10,7 +10,7 @@ Class content:
 - [x] Week 2: Linear Regression with Multiple Variables
 - [x] Week 3: Classification (logistic regression), Regularization
 - [x] Week 4: Neural networks: feedforward propagation
-- [ ] Week 5:
+- [ ] Week 5: Neural networks: backpropagation
 - [ ] Week 6:
 - [ ] Week 7:
 - [ ] Week 8:
