@@ -20,10 +20,12 @@ W = zeros(L_out, 1 + L_in);
 %
 
 
-
-
-
-
+% Teacher's code:
+% Randomly initialize the weights to small values
+epsilon_init = 0.12;
+% good choice of epsilon:
+% epsilon_init = sqrt(6) / sqrt(L_in + L_out);
+W = rand(L_out, L_in + 1) * 2 * epsilon_init - epsilon_init;
 
 
 

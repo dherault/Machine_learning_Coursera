@@ -136,6 +136,71 @@ end
 
 J = J + lambda / (2 * m) * regularized_suffix; % regularized ok :)
 
+% Backpropagation
+
+% disp('')
+% disp('!/__Backpropagation__\!')
+% disp('')
+
+% delta1 = zeros(size(Theta1_nobias));
+% delta2 = zeros(size(Theta2_nobias));
+% disp('delta1'), disp(size(delta1));
+% disp('delta2'), disp(size(delta2));
+
+for t=1:m
+  a1_bias = [1, X(t,:)];
+  z2 = a1_bias * Theta1';
+  a2_bias = [1, sigmoid(z2)];
+  a3 = sigmoid(a2_bias * Theta2');
+  
+  d3 = a3 - (y(t, 1) ==  recoding_vector);
+  d2 = d3 * Theta2_nobias .* sigmoidGradient(z2);
+  
+  Theta1_grad = Theta1_grad + d2' * a1_bias;
+  Theta2_grad = Theta2_grad + d3' * a2_bias;
+  
+  if (t == 1) 
+    % disp('[1, a1]'), disp(size([1, a1]));
+    % disp('d2t'), disp(size(d2' * [1, a1]));
+    % disp('a3'), disp(size(a3));
+    % disp('d3'), disp(size(d3));
+    % disp('Theta1_nobias'), disp(size(Theta1_nobias));
+    % disp('Theta2_nobias'), disp(size(Theta2_nobias));
+    % disp('sigmoidGradient(z2)'), disp(size(sigmoidGradient(z2)));
+    % disp('d2'), disp(size(d2));
+    % disp('a1t * d2'), disp(size(d2' * a1));
+    % disp('d3'), disp(size(d3));
+    % disp('a2'), disp(size(a2));
+  end
+end
+
+Theta1_grad = Theta1_grad / m;
+Theta2_grad = Theta2_grad / m;
+
+% disp('')
+% disp('!\__Backpropagation__/!')
+% disp('')
+
+% disp('')
+% disp('!/__Regularization__\!')
+% disp('')
+
+% disp('Theta1_grad'), disp(size(Theta1_grad));
+% disp('Theta2_grad'), disp(size(Theta2_grad));
+
+Theta1_grad_nobias_regularized = Theta1_grad(:, 2:end) + (lambda / m) * Theta1_nobias;
+Theta2_grad_nobias_regularized = Theta2_grad(:, 2:end) + (lambda / m) * Theta2_nobias;
+
+Theta1_grad = [Theta1_grad(:, 1), Theta1_grad_nobias_regularized];
+Theta2_grad = [Theta2_grad(:, 1), Theta2_grad_nobias_regularized];
+
+% disp('Theta1_grad_nobias_regularized'), disp(size(Theta1_grad_nobias_regularized));
+% disp('Theta2_grad_nobias_regularized'), disp(size(Theta2_grad_nobias_regularized));
+
+% disp('')
+% disp('!\__Regularization__/!')
+% disp('')
+
 % -------------------------------------------------------------
 
 % =========================================================================
