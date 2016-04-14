@@ -20,9 +20,21 @@ grad = zeros(size(theta));
 %
 
 
+% disp('X'), disp(size(X));
+% disp('theta'), disp(size(theta));
+% disp('y'), disp(size(y));
 
+h = X * theta;
+theta_nobias = [0; theta(2:end, :)];
 
+% disp('h'), disp(size(h));
+% disp('theta_nobias'), disp(size(theta_nobias)), disp(theta_nobias);
 
+J = (1 / (2 * m)) * (sum((h - y) .^ 2) + lambda * sum(theta_nobias .^ 2));
+
+% disp('sum(h - y) .* X'), disp(size(sum((h - y) .* X)));
+
+grad = (1 / m) * (sum((h - y) .* X) + lambda * theta_nobias');
 
 
 

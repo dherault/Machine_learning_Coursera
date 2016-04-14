@@ -34,6 +34,15 @@ class Matrix {
     this.isVector = this.nRow === 1 || this.nCol === 1; // We weirdly use the same class for matrixs and vectors
   }
   
+  get(x, y) {
+    return this.data[x][y];
+  }
+  
+  set(x, y, val) {
+    this.data[x][y] = val;
+    return this;
+  }
+  
   transpose() {
     const newData = [];
     
@@ -167,15 +176,15 @@ class Matrix {
   }
   
   // https://fr.wikipedia.org/wiki/%C3%89limination_de_Gauss-Jordan#Algorithme
-  inverse() {
+  inverse(skipDeterminantCheck) {
     
     if (!this.isSquare) throw new Error('Matrix.inverse: current matrix not square');
-    if (!this.getDeterminant()) throw new Error('Matrix.inverse: current matrix\'s determinant is 0, cannot inverse');
+    if (!skipDeterminantCheck && !this.getDeterminant()) throw new Error('Matrix.inverse: current matrix\'s determinant is 0, cannot inverse');
     
     const size = this.nRow;
     const identityData = createIdentityMatrixData(size);
     // Augmented matrix data:
-    const data = this.getDataClone().map((row, k) => row.concat(identityData[k]));
+    const data = this.data.map((row, k) => row.concat(identityData[k]));
     
     // Gauss-Jordan algorithm
     let r = -1;
