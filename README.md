@@ -11,8 +11,8 @@ Class content:
 - [x] Week 3: Classification (logistic regression), Regularization
 - [x] Week 4: Neural networks: feedforward propagation
 - [x] Week 5: Neural networks: backpropagation
-- [ ] Week 6: Advice for Applying Machine Learning
-- [ ] Week 7:
+- [x] Week 6: Advice for Applying Machine Learning
+- [ ] Week 7: Support Vector Machines
 - [ ] Week 8:
 - [ ] Week 9:
 - [ ] Week 10:
