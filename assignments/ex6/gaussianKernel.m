@@ -16,8 +16,9 @@ sim = 0;
 %
 %
 
-
-
+% disp('x1'), disp(size(x1));
+% disp('x2'), disp(size(x2));
+sim = exp(-sum((x1 - x2) .^ 2) / (2 * sigma ^ 2));
 
 
 
