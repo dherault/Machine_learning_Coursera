@@ -12,12 +12,12 @@ Class content:
 - [x] Week 4: Neural networks: feedforward propagation
 - [x] Week 5: Neural networks: backpropagation
 - [x] Week 6: Advice for Applying Machine Learning
-- [ ] Week 7: Support Vector Machines
-- [ ] Week 8:
+- [x] Week 7: Support Vector Machines
+- [ ] Week 8: Unsupervised Learning
 - [ ] Week 9:
 - [ ] Week 10:
 - [ ] Week 11:
 
 ### License
 
-CC0 1.0 Universal (public domain)
+CC0 1.0 Universal (public domain).
