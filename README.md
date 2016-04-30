@@ -13,8 +13,8 @@ Class content:
 - [x] Week 5: Neural networks: backpropagation
 - [x] Week 6: Advice for Applying Machine Learning
 - [x] Week 7: Support Vector Machines
-- [ ] Week 8: Unsupervised Learning
-- [ ] Week 9:
+- [x] Week 8: Unsupervised Learning
+- [ ] Week 9: Anomaly Detection
 - [ ] Week 10:
 - [ ] Week 11:
 
