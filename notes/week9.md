@@ -105,3 +105,46 @@ Most common problems:
 - p(x) is comparable (say, both large) for normal and anomalous examples --> Find a new feature!
 
 Combine features like x1² / x2
+
+### Multivariate Gaussian Distribution
+
+Don't model p(x1)p(x2), etc... separatly: Model p(x) in one go
+Parameters: mu and SIGMA (covariance matrix)
+
+`p(x; mu, sigma) = (1 / ((2Pi)^(n/2) * det(SIGMA)^0.5)) * exp(-0.5 * (x - mu)' * SIGMA^-1 * (x - mu))`
+
+Where `SIGMA = (1 / m) * sum(i=1..m, (x-i - mu)(x-i - mu)')`
+
+Algo: Fit p(x) by training mu and SIGMA, then given a new example x, compute p(x). Flag an anomaly if p(x) < epsilon
+
+Differences between the two models:
+Multivariates automatically captures correlations between features, but is more (cpu) expensive
+You must have m > n or SIGMA is non-invertible!!! (good: m > 10n) Also: linear combinations
+Original is ok with small m.
+
+## Recommender systems
+
+### Predicting Movie Ratings
+
+#### Problem Formulation
+
+- n_u: number of users
+- n_m: number of movies
+- r(i, j): 1 if user j as rated movie i
+- y-(i, j): rating given by user j to movies i (defined only if r(i, j) = 1)
+
+#### Content Based Recommendations
+
+We could, for each movie, define a feature vector x representing it's belonging to certain movie categories.
+`x = [1, romance_coef, action_coef]` (1 is our intercept term)
+Then, for each user j, learn a parameter theta. Predict user j as rating movie i with `(theta-j)' * x-i` stars.
+
+To learn theta:
+`min _(theta-j) (1 / 2m-j) * sum(i where r(i, j) = 1, ((theta-j)' * x-i - y-(i, j))² + (lambda / 2m-j) * sum(K=1..n, theta_k-j²))`
+ie
+`min _(theta-j) (1 / 2) * sum(i where r(i, j) = 1, ((theta-j)' * x-i - y-(i, j))² + (lambda / 2) * sum(K=1..n, theta_k-j²))`
+And for multiple users:
+https://www.coursera.org/learn/machine-learning/lecture/uG59z/content-based-recommendations
+And then gradient descent update (with learning rate alpha)
+
+This is called content-based recommendation. It assumes we have features that capture the content of movies (like its genre)
