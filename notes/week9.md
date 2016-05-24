@@ -148,3 +148,52 @@ https://www.coursera.org/learn/machine-learning/lecture/uG59z/content-based-reco
 And then gradient descent update (with learning rate alpha)
 
 This is called content-based recommendation. It assumes we have features that capture the content of movies (like its genre)
+
+### Collaborative Filtering
+
+If we don't know x_1 and x_2 (romance, action), but we know theta-j (each user tells us what s/he likes)
+
+We want to minimize the squared error (and regularize) (see picture)
+
+We can also guess theta, learn X, and learn theta, and learn X, ...
+This is a basic collaborative filtering algo, let's do better.
+
+Instead of going back and forth, we can minimize the whole thing at once (see 2nd picture)
+(note: no intercept term on X)
+
+Algo:
+```
+1 - Initialize X and Theta to small random values (symmetry breaking)
+2 - Minimize J using gradient descent (or anything)
+    X = X - alpha * dJ / dX
+    Theta = Theta - alpha * dJ / dTheta
+3 - For a user with parameters Theta and a movie with learned features X, predict a star rating of Theta' * X
+```
+
+### Low Rank Matrix Factorization
+
+#### Vectorization: Low Rank Matrix Factorization
+
+Let Y the movies/users ratings matrix
+Let X a matrix of nMovies rows, and nFeatures columns
+Let Theta a matrix of nUsers rows, and nFeatures columns
+
+Then the collaborative filtering algo we saw is also called low rank matrix Vectorization
+X * Theta' is a low rank matrix (algebra prop). It's the predicted ratings.
+
+Finding related movies:
+For each movie i, we learn a feature vector x-i € R^n
+How to find movies j related to i?
+--> small norm(x-j - x-i)
+
+#### Implementational Detail: Mean Normalization
+
+If a user has rated no movies, minimizing it's theta will produce theta = [0, 0] because of the theta regularization term
+Solution: perform mean normalization:
+for each movie, compute `mu = mean(ratings of the movie)`, then compute `Y = Y - 0.5 * mu (broadcast on Y columns)`
+Now in Y, each movie has a average rating of 0
+
+For user j, on movie i, predict `(theta-j)' * x-i + mu-i`
+And for our new user, theta-j = [0, 0], but the prediction is `(theta-j)' * x-i + mu-i = mu-i`!
+
+If a movie has no rating, you can do the same with Ys columns.
