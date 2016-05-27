@@ -42,7 +42,7 @@ Theta_grad = zeros(size(Theta));
 
 % disp('Theta'), disp(size(Theta));
 % disp('X'), disp(size(X));
-%
+
 % XTheta = X * Theta';
 % disp('XTheta'), disp(size(XTheta));
 % disp('Y'), disp(size(Y));
@@ -55,6 +55,31 @@ Theta_grad = zeros(size(Theta));
 % disp(sum(((X * Theta' - Y) .^ 2) .* R) / 2);
 
 J = sum(sum(((X * Theta' - Y) .^ 2) .* R)) / 2;
+J = J + lambda / 2 * (sum(sum(Theta .^ 2)) + sum(sum(X .^ 2)));
+
+for i=1:num_movies
+  idx = find(R(i, :) == 1);
+  Theta_temp = Theta(idx, :);
+  Y_temp = Y(i, idx);
+
+  X_grad(i, :) = (X(i, :) * Theta_temp' - Y_temp) * Theta_temp + lambda * X(i, :);
+end
+
+for j=1:num_users
+  idx = find(R(:, j) == 1);
+  X_temp = X(idx, :);
+  Y_temp = Y(idx, j);
+
+  % disp('j'), disp(j),
+  % disp('idx'), disp(idx),
+  % if j==1
+  %   disp('X_temp'), disp(size(X_temp))
+  %   disp('Theta(j, :)'''), disp(size(Theta(j, :)'))
+  %   disp('Y_temp'), disp(size(Y_temp))
+  % end
+
+  Theta_grad(j, :) = (Theta(j, :) * X_temp' - Y_temp') * X_temp + lambda * Theta(j, :);
+end
 
 % =============================================================
 

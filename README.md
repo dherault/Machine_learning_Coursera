@@ -14,8 +14,8 @@ Class content:
 - [x] Week 6: Advice for Applying Machine Learning
 - [x] Week 7: Support Vector Machines
 - [x] Week 8: Unsupervised Learning
-- [ ] Week 9: Anomaly Detection
-- [ ] Week 10:
+- [x] Week 9: Anomaly Detection
+- [ ] Week 10: Large Scale Machine Learning
 - [ ] Week 11:
 
 ### License
